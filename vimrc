@@ -111,7 +111,7 @@ nnoremap <leader>d ddO
 let mapleader = "\\"
 let maplocalleader = "\\"
 " fast way to edit .vimrc
-nnoremap <leader>ev :vert new $HOME/.vim/vimrc<cr><c-w>l
+nnoremap <leader>ev :vert new $HOME/.vim/vimrc<cr>
 " fast way to source .vimrc
 nnoremap <leader>sv :source $HOME/.vim/vimrc<cr>
 " some abbreviations
