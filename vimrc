@@ -111,9 +111,9 @@ nnoremap <leader>d ddO
 let mapleader = "\\"
 let maplocalleader = "\\"
 " fast way to edit .vimrc
-nnoremap <leader>ev :edit $MYVIMRC<cr><c-w>l
+nnoremap <leader>ev :vert new $HOME/.vim/vimrc<cr><c-w>l
 " fast way to source .vimrc
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :source $HOME/.vim/vimrc<cr>
 " some abbreviations
 iabbrev ssig eiie
 iabbrev eex example of a long abbreviation
