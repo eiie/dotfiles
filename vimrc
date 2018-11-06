@@ -21,7 +21,8 @@ colorscheme slate
 
 " Indentation 
 set autoindent
-set tabstop=4
+set tabstop=2
+set shiftwidth=2
 
 " Wildmenu
 set wildmenu
