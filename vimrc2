@@ -9,10 +9,10 @@ set relativenumber
 syntax on
 colorscheme slate
 
-" Indentation 
+" Indentation
 set autoindent
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 
 " Wildmenu
 set wildmenu
@@ -44,7 +44,18 @@ set noerrorbells
 " Mouse
 "set mouse=a " activation de la souris
 
-" Desactivate arrow keys
+" Fuzzy finder
+set path+=**
+
+" Wrap lines
+set wrap
+set textwidth=78
+
+" -------------------------
+" Key bindings
+" -------------------------
+
+" Disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <right> <nop>
@@ -91,30 +102,59 @@ nnoremap <Right> :vertical resize +2<CR>
 nnoremap è `
 nnoremap ç ^
 
+" -------------------------
+" Leader key bindings
+" -------------------------
 
+" Set leader key
+"nnoremap <SPACE> <Nop>
+"let mapleader =" "
 
+" Edit vimrc shortcuts
+nnoremap <leader>ev :vert new $HOME\.vimrc<cr>
+nnoremap <leader>sv :source $HOME\.vimrc<cr>
+
+" Shortcut to  set cursor line and column
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=none guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
+" Terminal statusline color configuration
+hi StatusLineTerm ctermbg=13 ctermfg=0
+hi StatusLineTermNC ctermbg=8 ctermfg=13
+
+" Shortcut to trim blanks
+nnoremap <leader><leader><space> :%s/\s\+$//e<cr>
+nnoremap <leader><leader><tab> :%s/<space><tab>/<tab>/gc<cr>
+
+" Shortcuts for the terminal
+nnoremap <leader>t :belowright terminal<cr>
+
+" -------------------------
 " Netrw configuration
-let g:netrw_banner=0
-let g:netrw_liststyle=3
+" -------------------------
+
+let g:netrw_banner=0 
+let g:netrw_liststyle=3 
 let g:netrw_browse_split=4
 let g:netrw_winsize = 20
 let g:netrw_altv=1
 
 " Open netrw at startup
 " augroup netrw
-"  	autocmd!
-"  	autocmd VimEnter * :Lexplore
-" 	autocmd
+"	autocmd!
+"	autocmd VimEnter * :Lexplore
+"	autocmd
 " augroup END
 
+" Function toggle netrw
 let g:NetrwIsOpen=0
-
 function! ToggleNetrw()
 	if g:NetrwIsOpen
 		let i = bufnr("$")
 	while (i >= 1)
 		if (getbufvar(i, "&filetype") == "netrw")
-			silent exe "bwipeout " . i 
+			silent exe "bwipeout " . i
 		endif
 		let i-=1
 		endwhile
@@ -125,47 +165,17 @@ function! ToggleNetrw()
 	endif
 endfunction
 
-" Add your own mapping. For example:
-nnoremap <silent> ° :call ToggleNetrw()<CR>
-
-" Fuzzy finder
-set path+=**
-
-
-
+" Maping toggle netrw 
+nnoremap <silent> ° :call ToggleNetrw()<CR> 
 
 " -------------------------
-" status line configuration
+" Status line configuration
 " -------------------------
 
-"	Possible mode 
-let g:currentmode={
-    \ 'n'  : 'Normal',
-    \ 'no' : 'Normal·Operator Pending',
-    \ 'v'  : 'Visual',
-    \ 'V'  : 'V·Line',
-    \ '^V' : 'V·Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S·Line',
-    \ '^S' : 'S·Block',
-    \ 'i'  : 'Insert',
-    \ 'R'  : 'Replace',
-    \ 'Rv' : 'V·Replace',
-    \ 'c'  : 'Command',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal'
-    \}
-
-" Mode will be shown in statusline
-set noshowmode
+set showmode
 
 " Remove vertical split highlighting
-hi VertSplit	ctermfg=8	ctermbg=0	cterm=NONE	
+hi VertSplit	ctermfg=8	ctermbg=0
 
 set laststatus=2 " always enable status line
 set ruler " position in %
@@ -184,45 +194,30 @@ set statusline=%<\%0*\ %n\ %F\ %h%m%r%=%-14.(%l/%L,%c%V%)\ %P  " statusline defi
 " %P - percentage
 
 " Statusline color (default and inactive window)
-hi StatusLine		ctermfg=0	ctermbg=2	cterm=NONE 
-hi StatusLineNC	ctermfg=2	ctermbg=8	cterm=NONE
+hi StatusLine		ctermfg=0	ctermbg=2
+hi StatusLineNC	ctermfg=2	ctermbg=8	
 
-" Change statusline color when entering and leaving insert mode 
+" Change statusline color when entering and leaving insert mode
 if version >= 700
-  au InsertEnter * hi StatusLine ctermbg=0 ctermbg=46	cterm=NONE
-  au InsertLeave * hi StatusLine ctermfg=0 ctermbg=2	cterm=NONE
+  au InsertEnter * hi StatusLine ctermbg=0 ctermbg=46
+  au InsertLeave * hi StatusLine ctermfg=0 ctermbg=2
 endif
 
+" -------------------------
+" Tab line configration
+" -------------------------
 
+set showtabline=2 " Always show tabline
 
-
-
-
-
-
-
-
+" Tab color configuration
+hi TabLineFill	ctermfg=2	ctermbg=8
+hi TabLine			ctermfg=0	ctermbg=8
+hi TabLineSel		ctermfg=0	ctermbg=2
+hi Title 				ctermfg=0
 
 " -------------------------
 
-" Edit vimrc shortcuts
-nnoremap <leader>ev :vert new $HOME\.vimrc<cr>
-nnoremap <leader>sv :source $HOME\.vimrc<cr>
+" Number colors
+hi LineNR ctermfg=8
 
-" Shortcut to  set cursor line and column 
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=none guibg=darkred guifg=white
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
-
-" Tab color configuration
-hi TabLineFill ctermfg=2	ctermbg=8
-hi TabLine		 ctermfg=0		ctermbg=8
-hi TabLineSel ctermfg=0 ctermbg=2
-hi Title ctermfg=0
-
-set showtabline=2
-
-
-" Terminal statusline color configuration
-hi StatusLineTerm ctermbg=13 ctermfg=0
-hi StatusLineTermNC ctermbg=8 ctermfg=13
+" remap ctrl to space ??
