@@ -1,4 +1,5 @@
-"Compatibility set nocompatible
+"Compatibility 
+set nocompatible
 
 " Show numbers
 set number
